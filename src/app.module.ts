@@ -9,10 +9,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { dbConfigService } from './common/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot(dbConfigService.getTypeOrmConfig()),
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [
