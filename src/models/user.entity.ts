@@ -3,6 +3,7 @@ import { Exclude } from 'class-transformer';
 import { BaseEntity } from './base.entity';
 import { ENTITY_NAME } from '../common/constant';
 import { Review } from './review.entity';
+import { Comment } from './comments.entity';
 
 @Entity({ name: ENTITY_NAME.USER })
 export class User extends BaseEntity {
@@ -15,4 +16,7 @@ export class User extends BaseEntity {
 
   @OneToMany(() => Review, (ref) => ref.user)
   reviews: Review[];
+
+  @OneToMany(() => Comment, (ref) => ref.user)
+  comments: Comment[];
 }

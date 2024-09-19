@@ -1,8 +1,9 @@
-import { Entity, Column, ManyToOne } from 'typeorm';
+import { Entity, Column, ManyToOne, OneToMany } from 'typeorm';
 import { BaseEntity } from './base.entity';
 import { ENTITY_NAME } from '../common/constant';
 import { User } from './user.entity';
 import { Book } from './book.entity';
+import { Comment } from './comments.entity';
 
 @Entity({ name: ENTITY_NAME.REVIEW })
 export class Review extends BaseEntity {
@@ -23,4 +24,7 @@ export class Review extends BaseEntity {
 
     @ManyToOne(() => Book, (ref) => ref.reviews)
     book: Book;
+
+    @OneToMany(() => Comment, (ref) => ref.review)
+    comments: Comment[];
 }
