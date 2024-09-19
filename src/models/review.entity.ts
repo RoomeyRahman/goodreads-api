@@ -4,7 +4,7 @@ import { ENTITY_NAME } from '../common/constant';
 import { User } from './user.entity';
 import { Book } from './book.entity';
 
-@Entity({ name: ENTITY_NAME.BOOK })
+@Entity({ name: ENTITY_NAME.REVIEW })
 export class Review extends BaseEntity {
     @Column({ type: 'int' })
     ratings: number;

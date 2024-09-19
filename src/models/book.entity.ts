@@ -11,10 +11,10 @@ export class Book extends BaseEntity {
     @Column({ type: 'varchar', length: 80 })
     author: string; 
 
-    @Column({ type: 'varchar', length: 80 })
+    @Column({ type: 'varchar', length: 80, nullable: true })
     genre: string; 
 
-    @Column({ type: 'varchar', length: 80 })
+    @Column({ type: 'varchar', length: 80, nullable: true })
     isbn: string; 
 
     @OneToMany(() => Review, (ref) => ref.book)
