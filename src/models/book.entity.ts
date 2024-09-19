@@ -1,6 +1,7 @@
-import { Entity, Column } from 'typeorm';
+import { Entity, Column, OneToMany } from 'typeorm';
 import { BaseEntity } from './base.entity';
 import { ENTITY_NAME } from '../common/constant';
+import { Review } from './review.entity';
 
 @Entity({ name: ENTITY_NAME.BOOK })
 export class Book extends BaseEntity {
@@ -15,4 +16,7 @@ export class Book extends BaseEntity {
 
     @Column({ type: 'varchar', length: 80 })
     isbn: string; 
+
+    @OneToMany(() => Review, (ref) => ref.book)
+    reviews: Review[];
 }
