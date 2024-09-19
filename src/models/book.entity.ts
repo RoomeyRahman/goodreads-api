@@ -9,10 +9,10 @@ export class Book extends BaseEntity {
     name: string;
 
     @Column({ type: 'varchar', length: 80 })
-    genre: string; 
+    author: string; 
 
     @Column({ type: 'varchar', length: 80 })
-    author: string; 
+    genre: string; 
 
     @Column({ type: 'varchar', length: 80 })
     isbn: string; 
