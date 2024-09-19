@@ -12,13 +12,15 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { BooksModule } from './books/books.module';
+import { ReviewsModule } from './reviews/reviews.module';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot(dbConfigService.getTypeOrmConfig()),
     UsersModule,
     AuthModule,
-    BooksModule
+    BooksModule,
+    ReviewsModule
   ],
   controllers: [AppController],
   providers: [
