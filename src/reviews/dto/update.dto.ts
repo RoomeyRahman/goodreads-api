@@ -10,9 +10,6 @@ export class UpdateReviewDto implements Readonly<UpdateReviewDto> {
   @MaxLength(5000)
   review: string;
 
-  @ApiProperty()
-  organization: number;
-
   constructor(data) {
     if (data) {
       data.ratings && (this.ratings = data.ratings);

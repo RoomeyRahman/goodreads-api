@@ -11,12 +11,13 @@ export class CreateReviewDto implements Readonly<CreateReviewDto> {
   review: string;
 
   @ApiProperty()
-  organization: number;
+  book: number;
 
   constructor(data) {
     if (data) {
       data.ratings && (this.ratings = data.ratings);
       data.review && (this.review = data.review);
+      data.book && (this.book = data.book);
     }
   }
 }
