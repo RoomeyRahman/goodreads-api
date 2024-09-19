@@ -25,6 +25,7 @@ import { TrimPipe, ValidationPipe } from '../common/pipes';
 import { BooksService } from './books.service';
 import { CreateBookDto } from './dto/create.dto';
 import { IUser } from 'src/common/interfaces';
+import { SearchQueryDto } from 'src/common/dtos';
 
 @Controller('books')
 export class BooksController {
@@ -67,10 +68,26 @@ export class BooksController {
     }
   }
 
+  /**
+   * Search and fetch records
+   */
+  @ApiOperation({ summary: 'Get all record' })
+  @UsePipes(new ValidationPipe(true))
+  @UseGuards(JwtAuthGuard)
   @Get()
-  findAll() {
-    return this.service.findAll();
+  public find(
+    @User() user: IUser,
+    @Query() query: SearchQueryDto,
+  ) {
+    try {
+      return this.service.find(query, user);
+    } catch (err) {
+      throw new HttpException(err, err.status || HttpStatus.BAD_REQUEST, {
+        cause: new Error(err),
+      });
+    }
   }
+  
 
   @Get(':id')
   findOne(@Param('id') id: string) {

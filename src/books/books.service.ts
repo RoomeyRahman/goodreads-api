@@ -43,8 +43,52 @@ export class BooksService {
     }
   }
 
-  findAll() {
-    return `This action returns all books`;
+   /**
+   * Search and fetch records
+   */
+   public async find(query: SearchQueryDto, user: IUser) {
+    try {
+      const filter = (query.filter && JSON.parse(query.filter)) ?? {};
+      if (filter && filter.name) {
+        filter.name = ILike(`%${filter.review}%`);
+      }
+      const where = {
+        ...filter,
+      };
+
+      const sort = (query.sort && JSON.parse(query.sort)) ?? {
+        name: 'ASC',
+      };
+      const order = {
+        ...sort,
+      };
+
+      const res = await this.repository.find({
+        where: where,
+        take: query.limit || 10,
+        skip: query.skip || 0,
+        order: order,
+      });
+
+      const result: any = {
+        data: res,
+      };
+
+      if (query.pagination) {
+        const total = await this.repository.count({
+          where: where,
+        });
+        result.pagination = {
+          total,
+          limit: query.limit,
+          skip: query.skip,
+        };
+      }
+
+      return result;
+    } catch (err) {
+      throw new HttpException(err, err.status || HttpStatus.BAD_REQUEST);
+    }
   }
 
   findOne(id: number) {
