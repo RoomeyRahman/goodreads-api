@@ -10,11 +10,13 @@ import { dbConfigService } from './common/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot(dbConfigService.getTypeOrmConfig()),
     UsersModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [
