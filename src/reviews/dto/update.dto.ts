@@ -10,10 +10,20 @@ export class UpdateReviewDto implements Readonly<UpdateReviewDto> {
   @MaxLength(5000)
   review: string;
 
+  @ApiProperty()
+  @IsString()
+  dateStarted: string;
+
+  @ApiProperty()
+  @IsString()
+  dateFinished: string;
+
   constructor(data) {
     if (data) {
       data.ratings && (this.ratings = data.ratings);
       data.review && (this.review = data.review);
+      data.dateStarted && (this.dateStarted = data.dateStarted);
+      data.dateFinished && (this.dateFinished = data.dateFinished);
     }
   }
 }

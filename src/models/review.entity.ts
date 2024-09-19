@@ -12,6 +12,12 @@ export class Review extends BaseEntity {
     @Column({ type: 'varchar', length: 800 })
     review: string; 
 
+    @Column({ type: 'varchar', length: 800 })
+    dateStarted: string; 
+
+    @Column({ type: 'varchar', length: 800 })
+    dateFinished: string; 
+
     @ManyToOne(() => User, (ref) => ref.reviews)
     user: User;
 
