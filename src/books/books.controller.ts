@@ -89,13 +89,23 @@ export class BooksController {
   }
   
 
+  /**
+   * @Param {number} id
+   */
+  @ApiOperation({ summary: 'Get record from id' })
+  @ApiResponse({ status: 200, description: 'Return record.' })
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: 'User Not found.',
+  })
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.service.findOne(+id);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.service.remove(+id);
+  public async getOne(@Param('id') id: number) {
+    try {
+      return await this.service.findById(id);
+    } catch (err) {
+      throw new HttpException(err, err.status || HttpStatus.BAD_REQUEST, {
+        cause: new Error(err),
+      });
+    }
   }
 }

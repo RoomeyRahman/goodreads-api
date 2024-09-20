@@ -91,8 +91,26 @@ export class BooksService {
     }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} book`;
+  /**
+   * Fetch a record by id
+   * @param {number} id
+   */
+  public async findById(id: number) {
+    try {
+      const record = await this.repository.findOne({
+        where: {
+          id: id,
+        },
+      });
+
+      if (!record) {
+        throw new NotFoundException(`Record #${id} not found`);
+      }
+
+      return record;
+    } catch (err) {
+      throw new HttpException(err, err.status || HttpStatus.BAD_REQUEST);
+    }
   }
 
   remove(id: number) {

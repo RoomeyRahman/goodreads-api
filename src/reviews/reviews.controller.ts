@@ -134,5 +134,25 @@ export class ReviewsController {
       });
     }
   }
+
+  /**
+   * @Param {number} id
+   */
+  @ApiOperation({ summary: 'Get record from id' })
+  @ApiResponse({ status: 200, description: 'Return record.' })
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: 'User Not found.',
+  })
+  @Get(':id')
+  public async getOne(@Param('id') id: number) {
+    try {
+      return await this.service.findById(id);
+    } catch (err) {
+      throw new HttpException(err, err.status || HttpStatus.BAD_REQUEST, {
+        cause: new Error(err),
+      });
+    }
+  }
 }
 
