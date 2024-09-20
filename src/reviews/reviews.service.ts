@@ -102,7 +102,7 @@ export class ReviewsService {
   public async find(query: SearchQueryDto, user: IUser) {
     try {
       const filter = (query.filter && JSON.parse(query.filter)) ?? {};
-      if (filter && filter.name) {
+      if (filter && filter.review) {
         filter.review = ILike(`%${filter.review}%`);
       }
       const where = {
