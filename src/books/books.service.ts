@@ -68,6 +68,7 @@ export class BooksService {
         take: query.limit || 10,
         skip: query.skip || 0,
         order: order,
+        relations: ['reviews']
       });
 
       const result: any = {
@@ -101,6 +102,7 @@ export class BooksService {
         where: {
           id: id,
         },
+        relations: ['reviews']
       });
 
       if (!record) {
