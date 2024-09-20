@@ -111,6 +111,7 @@ export class ReviewsService {
 
       const res = await this.repository.find({
         where: where,
+        relations: ['user', 'book', 'comments'],
         take: query.limit || 10,
         skip: query.skip || 0,
       });
@@ -146,6 +147,7 @@ export class ReviewsService {
         where: {
           id: id,
         },
+        relations: ['user', 'book', 'comments'],
       });
 
       if (!record) {
