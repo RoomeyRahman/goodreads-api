@@ -109,18 +109,10 @@ export class ReviewsService {
         ...filter,
       };
 
-      const sort = (query.sort && JSON.parse(query.sort)) ?? {
-        name: 'ASC',
-      };
-      const order = {
-        ...sort,
-      };
-
       const res = await this.repository.find({
         where: where,
         take: query.limit || 10,
         skip: query.skip || 0,
-        order: order,
       });
 
       const result: any = {
